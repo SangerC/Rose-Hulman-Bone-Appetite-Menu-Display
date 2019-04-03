@@ -199,6 +199,7 @@ public class Main extends JPanel{
     		for(int i=0;i<this.eggTimeCounter.length;i++) {
     			this.eggTimeCounter[i]=0;
     		}
+    		this.eggTime=false;
     	}
     	if((Character.getNumericValue(time.charAt(11))==0&&Character.getNumericValue(time.charAt(12))==1)) {
     		setMenuNull();
