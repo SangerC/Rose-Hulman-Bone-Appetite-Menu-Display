@@ -28,7 +28,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 @SuppressWarnings("serial")
-public class Main extends JPanel {
+public class Main extends JPanel{
 
     public static final int BREAKFASTTIME = 0;
     public static final int LUNCHTIME = 1;
@@ -54,8 +54,22 @@ public class Main extends JPanel {
     ArrayList<String> rosies= new ArrayList<String>();
     String menuSearch = null;
 
+	public static void main(String[] args) throws InterruptedException{
+		JFrame frame = new JFrame("What's at the Bone ¯\\_(ツ)_/¯");
+		Main window = new Main();
+		frame.add(window);
+		frame.setSize(1366, 768);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		while (true) {
+			window.updateTime();
+			window.repaint();
+			Thread.sleep(10);
+		}
+	}
+    //Graphics Functions
 	@Override
-	public void paint(Graphics g) {
+	public void paint(Graphics g){
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.DARK_GRAY);
@@ -70,18 +84,15 @@ public class Main extends JPanel {
 			g2.drawString(this.getFuzzyTime(), 475, 80);
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
 			g2.drawString("Menu:", 600, 125);
-			
-			
 			drawSection(g2, global, 5);
 			drawSection(g2, roots, 200);
 			drawSection(g2, sizzle, 400);
 			drawSection(g2, pomodoro, 650);
 			drawSection(g2, rise, 900);
 			drawSection(g2, rosies, 1150);
-			
 		}
 	}
-	public void drawSection(Graphics2D g2, ArrayList<String> section, int x) {
+	public void drawSection(Graphics2D g2, ArrayList<String> section, int x){
 		for(int i=0;i<section.size();i++){
 			if(i==0) {
 				g2.setFont(new Font("TimesRoman", Font.BOLD, 32));
@@ -97,21 +108,6 @@ public class Main extends JPanel {
 					g2.drawString(section.get(i), x+100, 205+20*(i-26));
 				}
 			}
-		}
-	}
-	public static void main(String[] args) throws InterruptedException {
-		JFrame frame = new JFrame("What's at the Bone ¯\\_(ツ)_/¯");
-		Main window = new Main();
-		frame.add(window);
-		frame.setSize(1366, 768);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		while (true) {
-			window.updateTime();
-			
-			window.repaint();
-			Thread.sleep(10);
 		}
 	}
 	public void checkRaphtailiaTime(Graphics2D g2){
@@ -150,6 +146,7 @@ public class Main extends JPanel {
 		}
 		return false;
 	}
+	//Time Functions
 	public String getFuzzyTime(){
 		if(this.fuzzyTime == BREAKFASTTIME){
 			return "Breakfast Time";
@@ -179,7 +176,6 @@ public class Main extends JPanel {
 		this.day = simpleDateformat.format(date);
 		this.setTimeFuzzy(currentTime,day);
 	}
-	
 	public void setTimeFuzzy(String time, String day){
     	if(day.equals("Wednesday")){
     		this.raphtailiaTime = true;
@@ -243,6 +239,7 @@ public class Main extends JPanel {
         	}
     	}
     }
+	//html parsing functions
     public void setMenuNull(){
     	global.clear();
     	rise.clear();
