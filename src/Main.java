@@ -78,7 +78,6 @@ public class Main extends JPanel{
 		g2.setColor(Color.DARK_GRAY);
 		g2.fillRect(0, 0, 1366, 768);
 		g2.setColor(Color.LIGHT_GRAY);
-		raphtailiaTime=true;
 		checkRaphtailiaTime(g2);
 		g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
 		g2.drawString(this.day+":  "+this.currentTime2, 850, 50);
