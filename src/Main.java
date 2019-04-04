@@ -45,6 +45,8 @@ public class Main extends JPanel{
     Toolkit toolkit = Toolkit.getDefaultToolkit();
     Image raphitaliaFingerSpin = toolkit.getImage("51b.gif");
     Image raphitaliaPie = toolkit.getImage("large.jpg");
+    Image tendies = toolkit.getImage("chickenTedender.jpg");
+    Image egg = toolkit.getImage("egg.jpg");
     String title = "BoneMenu";
     ArrayList<String> global= new ArrayList<String>();
     ArrayList<String> roots= new ArrayList<String>();
@@ -75,11 +77,14 @@ public class Main extends JPanel{
 		g2.setColor(Color.DARK_GRAY);
 		g2.fillRect(0, 0, 1366, 768);
 		g2.setColor(Color.LIGHT_GRAY);
+		checkRaphtailiaTime(g2);
 		g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
 		g2.drawString(this.day+":  "+this.currentTime2, 850, 50);
-		checkRaphtailiaTime(g2);
 		if(this.checkForEggTime(g2)!=true){
 			g2.setColor(Color.LIGHT_GRAY);
+			if(raphtailiaTime) {
+				g2.setColor(Color.GREEN);
+			}
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 50)); 
 			g2.drawString(this.getFuzzyTime(), 475, 80);
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
