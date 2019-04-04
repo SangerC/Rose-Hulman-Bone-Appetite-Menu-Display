@@ -39,13 +39,14 @@ public class Main extends JPanel{
     public boolean raphtailiaTime = false;
     public int eggTimeCounter[] = {0,0,0,0};
     public boolean eggTime = false;
+    boolean tendieTime = false;
     String currentTime = " ";
     String currentTime2 = " ";
     String day = " ";    
     Toolkit toolkit = Toolkit.getDefaultToolkit();
     Image raphitaliaFingerSpin = toolkit.getImage("51b.gif");
     Image raphitaliaPie = toolkit.getImage("large.jpg");
-    Image tendies = toolkit.getImage("chickenTedender.jpg");
+    Image tendies = toolkit.getImage("chickenTender.jpg");
     Image egg = toolkit.getImage("egg.jpg");
     String title = "BoneMenu";
     ArrayList<String> global= new ArrayList<String>();
@@ -77,41 +78,66 @@ public class Main extends JPanel{
 		g2.setColor(Color.DARK_GRAY);
 		g2.fillRect(0, 0, 1366, 768);
 		g2.setColor(Color.LIGHT_GRAY);
+		raphtailiaTime=true;
 		checkRaphtailiaTime(g2);
 		g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
 		g2.drawString(this.day+":  "+this.currentTime2, 850, 50);
 		if(this.checkForEggTime(g2)!=true){
-			g2.setColor(Color.LIGHT_GRAY);
-			if(raphtailiaTime) {
-				g2.setColor(Color.GREEN);
+			if(raphtailiaTime){
+				g2.setColor(Color.RED);
+			}
+			else{
+				g2.setColor(Color.LIGHT_GRAY);
 			}
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 50)); 
 			g2.drawString(this.getFuzzyTime(), 475, 80);
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
-			g2.drawString("Menu:", 600, 125);
-			drawSection(g2, global, 5);
-			drawSection(g2, roots, 200);
-			drawSection(g2, sizzle, 400);
-			drawSection(g2, pomodoro, 650);
-			drawSection(g2, rise, 900);
-			drawSection(g2, rosies, 1150);
+			g2.drawString("Menu:", 600, 125);			
+			drawSection(g2, global, 200, 130);
+			drawSection(g2, roots, 285, 110);
+			drawSection(g2, sizzle, 370, 120);
+			drawSection(g2, pomodoro, 455, 200);
+			drawSection(g2, rise, 540, 85);
+			drawSection(g2, rosies, 625, 125);
+			if(tendieTime) {
+				g2.drawImage(tendies, 0, 0, this);
+				tendieTime=false;
+			}
 		}
 	}
-	public void drawSection(Graphics2D g2, ArrayList<String> section, int x){
-		for(int i=0;i<section.size();i++){
-			if(i==0) {
-				g2.setFont(new Font("TimesRoman", Font.BOLD, 32));
-				g2.drawString(section.get(i)+":", x, 200);
-			}
-			else{
-				if(i<27) {
-					g2.setFont(new Font("TimesRoman", Font.PLAIN, 18));
-					g2.drawString(section.get(i), x, 205+20*(i));
+	public void drawSection(Graphics2D g2, ArrayList<String> section, int y, int titleOffset){
+		if(section.size()>0) {
+			StringBuilder sb = new StringBuilder();
+			StringBuilder sb2 = new StringBuilder();
+			StringBuilder sb3 = new StringBuilder();
+			for (int i=1; i<section.size();i++)
+			{
+				if(sb.length()<115) {
+					sb.append(section.get(i)+" ");
+				}
+				else if (sb.length()<230){
+					sb2.append(section.get(i)+" ");
 				}
 				else {
-					g2.setFont(new Font("TimesRoman", Font.PLAIN, 18));
-					g2.drawString(section.get(i), x+100, 205+20*(i-26));
+					sb3.append(section.get(i)+" ");
 				}
+			}
+			String top = sb.toString();
+			String bottom = sb2.toString();
+			String inCaseOfLong = sb3.toString();
+			if(section.get(0).equals("rosies")) {
+				top.replace("favorites", "");
+			}
+			top.replace(section.get(0), "");
+			bottom.replace(section.get(0), "");
+			g2.setFont(new Font("TimesRoman", Font.BOLD, 32));
+			g2.drawString(section.get(0)+": ", 0, y);
+			g2.setFont(new Font("TimesRoman", Font.PLAIN, 18));
+			g2.drawString(top, titleOffset, y);
+			g2.drawString(bottom, titleOffset, y+22);
+			g2.drawString(inCaseOfLong, titleOffset, y+44);
+			if(top.contains("Chicken Tenders")||bottom.contains("Chicken Tenders")) {
+				tendieTime= true;
 			}
 		}
 	}
@@ -132,18 +158,20 @@ public class Main extends JPanel{
 			}
 		}
 		if(end == true){
-			g2.setColor(Color.WHITE);
 			if(this.eggTime!=true) {
 				int seconds = ((this.eggTimeCounter[0]*10+this.eggTimeCounter[1])*60)+(this.eggTimeCounter[2]*10+this.eggTimeCounter[3]);
 				int countDown = 3600 - seconds;
                 int numberOfMinutes = countDown/60; 
 				int numberOfSeconds = countDown%60;
+				g2.setColor(Color.WHITE);
 				g2.setFont(new Font("TimesRoman", Font.PLAIN, 100));
 				g2.drawString("Egg Time Countdown: ", 200, 300);
 				g2.drawString(numberOfMinutes+" : "+numberOfSeconds, 200, 450);
 				return true;
 			}
 			else {
+				g2.setColor(Color.BLACK);
+				g2.drawImage(egg, 0, 0, this);
 				g2.setFont(new Font("TimesRoman", Font.PLAIN, 200));
 				g2.drawString("EGG TIME!!", 50, 400);
 				return true;
@@ -206,7 +234,7 @@ public class Main extends JPanel{
     		}
     		this.eggTime=false;
     	}
-    	if((Character.getNumericValue(time.charAt(11))==0&&Character.getNumericValue(time.charAt(12))==1)) {
+    	if((Character.getNumericValue(time.charAt(11))==0&&Character.getNumericValue(time.charAt(12))==5&&Character.getNumericValue(time.charAt(14))==0)&&Character.getNumericValue(time.charAt(15))==0&&Character.getNumericValue(time.charAt(17))==0){
     		setMenuNull();
     		parseMenu();
     	}
