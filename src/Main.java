@@ -64,7 +64,7 @@ public class Main extends JPanel{
 		while (true) {
 			window.updateTime();
 			window.repaint();
-			Thread.sleep(10);
+			Thread.sleep(100);
 		}
 	}
     //Graphics Functions
