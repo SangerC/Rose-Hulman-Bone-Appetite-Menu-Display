@@ -93,11 +93,11 @@ public class Main extends JPanel{
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 25)); 
 			g2.drawString("Menu:", 600, 125);			
 			drawSection(g2, global, 200, 130);
-			drawSection(g2, roots, 285, 110);
-			drawSection(g2, sizzle, 370, 120);
-			drawSection(g2, pomodoro, 455, 200);
-			drawSection(g2, rise, 540, 85);
-			drawSection(g2, rosies, 625, 125);
+			drawSection(g2, roots, 285, 120);
+			drawSection(g2, sizzle, 370, 130);
+			drawSection(g2, pomodoro, 455, 180);
+			drawSection(g2, rise, 540, 92);
+			drawSection(g2, rosies, 625, 130);
 			if(tendieTime) {
 				g2.drawImage(tendies, 0, 0, this);
 				tendieTime=false;
@@ -111,10 +111,10 @@ public class Main extends JPanel{
 			StringBuilder sb3 = new StringBuilder();
 			for (int i=1; i<section.size();i++)
 			{
-				if(sb.length()<115) {
+				if(sb.length()<95) {
 					sb.append(section.get(i)+" ");
 				}
-				else if (sb.length()<230){
+				else if (sb2.length()<95){
 					sb2.append(section.get(i)+" ");
 				}
 				else {
@@ -125,10 +125,10 @@ public class Main extends JPanel{
 			String bottom = sb2.toString();
 			String inCaseOfLong = sb3.toString();
 			if(section.get(0).equals("rosies")) {
-				top.replace("favorites", "");
+				top=top.replace("favorites", " ");
 			}
-			top.replace(section.get(0), "");
-			bottom.replace(section.get(0), "");
+			top=top.replace(section.get(0), " ");
+			bottom=bottom.replace(section.get(0), " ");
 			g2.setFont(new Font("TimesRoman", Font.BOLD, 32));
 			g2.drawString(section.get(0)+": ", 0, y);
 			g2.setFont(new Font("TimesRoman", Font.PLAIN, 18));
@@ -233,7 +233,11 @@ public class Main extends JPanel{
     		}
     		this.eggTime=false;
     	}
-    	if((Character.getNumericValue(time.charAt(11))==0&&Character.getNumericValue(time.charAt(12))==5&&Character.getNumericValue(time.charAt(14))==0)&&Character.getNumericValue(time.charAt(15))==0&&Character.getNumericValue(time.charAt(17))==0){
+    	if((Character.getNumericValue(time.charAt(11))==0&&Character.getNumericValue(time.charAt(12))==5&&Character.getNumericValue(time.charAt(14))==0)&&Character.getNumericValue(time.charAt(15))==0&&Character.getNumericValue(time.charAt(17))==0&&Character.getNumericValue(time.charAt(18))==5){
+    		setMenuNull();
+    		parseMenu();
+    	}
+    	if((Character.getNumericValue(time.charAt(11))==0&&Character.getNumericValue(time.charAt(12))==6&&Character.getNumericValue(time.charAt(14))==3)&&Character.getNumericValue(time.charAt(15))==0&&Character.getNumericValue(time.charAt(17))==0&&Character.getNumericValue(time.charAt(18))==5){
     		setMenuNull();
     		parseMenu();
     	}
